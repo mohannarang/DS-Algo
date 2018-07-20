@@ -33,7 +33,6 @@ function mergeSort(arr, l, r) {
     if (l < r) {
         const m = Math.floor((l + r) / 2);
 
-        console.log(l, r, m);
         mergeSort(arr, l, m);
         mergeSort(arr, m + 1, r);
 
