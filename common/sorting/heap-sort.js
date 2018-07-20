@@ -5,63 +5,43 @@ function swap(arr, i, j) {
     arr[j] =  tmp;
 }
 
-function heapifyMax(arr, n, i) {
-    let largest = i;
-    const l = 2 * i + 1;
-    const r = 2 * i + 2;
-    if (l < n && arr[l] > arr[largest]) {
-        largest = l;
-    }
-    if (r < n && arr[r] > arr[largest]) {
-        largest = r;
-    }
-
-    if (largest != i) {
-        swap(arr, i, largest);
-        heapifyMax(arr, n, largest);
-    }
+function defaultComparator(val1, val2) {
+  if (val1 > val2) {
+      return 1;
+  } else if (val2 > val1) {
+      return -1;
+  }
+  return 0;
 }
 
-function heapifyMin(arr, n, i) {
-    let smallest = i;
-    const l = 2 * i + 1;
-    const r = 2 * i + 2;
-    if (l < n && arr[l] < arr[largest]) {
-        smallest = l;
+function heapify(arr, n, i, comparator) {
+    let parent = i;
+    const leftChild = 2 * i + 1;
+    const rightChild = 2 * i + 2;
+    if (leftChild < n && comparator(arr[leftChild], arr[parent]) > 0) {
+        parent = leftChild;
     }
-    if (r < n && arr[r] < arr[largest]) {
-        smallest = r;
+    if (rightChild < n && comparator(arr[rightChild], arr[parent]) > 0) {
+        parent = rightChild;
     }
 
-    if (smallest != i) {
-        swap(arr, i, smallest);
-        heapifyMin(arr, n, smallest);
+    if (parent != i) {
+        swap(arr, i, parent);
+        heapify(arr, n, parent, comparator);
     }
 }
 
 
-function heapSortAscending(arr) {
+function heapSort(arr, comparator = defaultComparator) {
     const len = arr.length;
     // Build heap.
     let lastParent = Math.floor(len / 2) -  1;
     for (let i = lastParent; i >= 0; i--) {
-       heapifyMax(arr, len , i);
+       heapify(arr, len , i, comparator);
     }
     for (let i = len - 1; i > 0; i--) {
       swap(arr, 0, i);
-      heapifyMax(arr, i, 0);
+      heapify(arr, i, 0, comparator);
     }
-}
-
-function heapSortDescending(arr) {
-    const len = arr.length;
-    // Build heap.
-    let lastParent = Math.floor(len / 2) -  1;
-    for (let i = lastParent; i >= 0; i--) {
-       heapifyMin(arr, len , i);
-    }
-    for (let i = len - 1; i > 0; i--) {
-      swap(arr, 0, i);
-      heapifyMin(arr, i, 0);
-    }
+    return arr;
 }
