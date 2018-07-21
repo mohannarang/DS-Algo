@@ -1,7 +1,7 @@
 class PriorityQueue {
   constructor(comparator = PriorityQueue.defaultComparator) {
-    this.heap = [];
-    this.comparator = comparator;
+    this.heap_ = [];
+    this.comparator_ = comparator;
   }
 
   static defaultComparator(parent, child) {
@@ -15,24 +15,24 @@ class PriorityQueue {
   }
 
   get size() {
-    return this.heap.length;
+    return this.heap_.length;
   }
 
   isEmpty() {
-    return this.heap.length == 0;
+    return this.heap_.length == 0;
   }
 
   peek() {
     if (this.size === 0) {
       throw Error('Priority queue is empty');
     }
-    return this.heap[0];
+    return this.heap_[0];
   }
 
   poll() {
     const val = this.peek();
-    this.heap[0] = this.heap[this.size - 1];
-    this.heap.length--;
+    this.heap_[0] = this.heap_[this.size - 1];
+    this.heap_.length--;
 
     heapifyDown_();
 
@@ -40,7 +40,7 @@ class PriorityQueue {
   }
 
   add(val) {
-    this.heap.push(val);
+    this.heap_.push(val);
     this.heapifyUp_();
     return this.size;
   }
@@ -51,10 +51,10 @@ class PriorityQueue {
       const leftchild = pos * 2 + 1;
       const rightChild = pos * 2 + 2;
       let newPos = pos;
-      if (this.comparator(arr[parent], arr[leftchild]) > 0) {
+      if (this.comparator_(arr[parent], arr[leftchild]) > 0) {
         newPos = leftChild;
       }
-      if (this.comparator(arr[parent], arr[rightChild]) > 0) {
+      if (this.comparator_(arr[parent], arr[rightChild]) > 0) {
         newPos = rightChild;
       }
       if (newPos == pos) {
@@ -69,7 +69,7 @@ class PriorityQueue {
     let pos = this.size - 1;
     while (pos > 0) {
       const parent = Math.floor((pos - 1) / 2);
-      if (this.comparator(this.heap[parent], this.heap[pos]) > 0) {
+      if (this.comparator_(this.heap_[parent], this.heap_[pos]) > 0) {
         this.swap_(parent, pos);
         pos = parent;
       } else {
@@ -79,8 +79,8 @@ class PriorityQueue {
   }
 
   swap_(i, j) {
-    const temp = this.heap[j];
-    this.heap[j] = this.heap[i];
-    this.heap[i] = temp;
+    const temp = this.heap_[j];
+    this.heap_[j] = this.heap_[i];
+    this.heap_[i] = temp;
   }
 }
