@@ -5,12 +5,8 @@ class PriorityQueue {
   }
 
   static defaultComparator(parent, child) {
-    if (parent > child) {
-      return -1;
-    }
-    if (parent < child) {
-      return 1;
-    }
+    if (parent > child) return -1;
+    if (parent < child) return 1;
     return 0;
   }
 
