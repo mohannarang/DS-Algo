@@ -1,27 +1,27 @@
 function swap(arr, i, j) {
-    const tmp = arr[i];
-    arr[i] = arr[j];
-    arr[j] =  tmp;
+  const tmp = arr[i];
+  arr[i] = arr[j];
+  arr[j] = tmp;
 }
 
 function partition(arr, low, high) {
-    const pivot = arr[high];
-    let i = low - 1;
-    for (let j = low; j < high; j ++) {
-        if (arr[j] <= pivot) {
-            i++;
-            swap(arr, i, j);
-        }
+  const pivot = arr[high];
+  let i = low - 1;
+  for (let j = low; j < high; j++) {
+    if (arr[j] <= pivot) {
+      i++;
+      swap(arr, i, j);
     }
-    swap(arr, i + 1, high);
-    return i + 1; 
+  }
+  swap(arr, i + 1, high);
+  return i + 1;
 }
 
 function quickSort(arr, low, high) {
-    if (low < high) {
-        const pi = partition(arr, low, high);
-        quickSort(arr, low, pi - 1);
-        quickSort(arr, pi + 1, high);
-    }
-    return arr;
+  if (low < high) {
+    const pi = partition(arr, low, high);
+    quickSort(arr, low, pi - 1);
+    quickSort(arr, pi + 1, high);
+  }
+  return arr;
 }
