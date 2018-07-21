@@ -34,7 +34,7 @@ class PriorityQueue {
     this.heap_[0] = this.heap_[this.size - 1];
     this.heap_.length--;
 
-    heapifyDown_();
+    this.heapifyDown_();
 
     return val;
   }
@@ -48,13 +48,14 @@ class PriorityQueue {
   heapifyDown_() {
     let pos = 0;
     while (pos < Math.floor(this.size / 2)) {
-      const leftchild = pos * 2 + 1;
-      const rightChild = pos * 2 + 2;
+      const lChild = pos * 2 + 1;
+      const rChild = lChild + 1;
       let newPos = pos;
-      if (this.comparator_(arr[parent], arr[leftchild]) > 0) {
-        newPos = leftChild;
+      if (this.comparator_(this.heap_[newPos], this.heap_[lChild]) > 0) {
+        newPos = lChild;
       }
-      if (this.comparator_(arr[parent], arr[rightChild]) > 0) {
+      if (rChild < this.size &&
+          this.comparator_(this.heap_[newPos], this.heap_[rChild]) > 0) {
         newPos = rightChild;
       }
       if (newPos == pos) {
