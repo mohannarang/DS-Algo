@@ -14,10 +14,35 @@ class PriorityQueue {
     this.comparator = comparator;
   }
 
-  swap_(i, j) {
-    const temp = this.heap[j];
-    this.heap[j] = this.heap[i];
-    this.heap[i] = temp;
+  get size() {
+    return this.heap.length;
+  }
+
+  isEmpty() {
+    return this.heap.length == 0;
+  }
+
+  peek() {
+    if (this.size === 0) {
+      throw Error('Priority queue is empty');
+    }
+    return this.heap[0];
+  }
+
+  poll() {
+    const val = this.peek();
+    this.heap[0] = this.heap[this.size - 1];
+    this.heap.length--;
+
+    heapifyDown_();
+
+    return val;
+  }
+
+  add(val) {
+    this.heap.push(val);
+    this.heapifyUp_();
+    return this.size;
   }
 
   heapifyDown_() {
@@ -53,34 +78,9 @@ class PriorityQueue {
     }
   }
 
-  isEmpty() {
-    return this.heap.length == 0;
-  }
-
-  get size() {
-    return this.heap.length;
-  }
-
-  peek() {
-    if (this.size === 0) {
-      throw Error('Priority queue is empty');
-    }
-    return this.heap[0];
-  }
-
-  poll() {
-    const val = this.peek();
-    this.heap[0] = this.heap[this.size - 1];
-    this.heap.length--;
-
-    heapifyDown_();
-
-    return val;
-  }
-
-  add(val) {
-    this.heap.push(val);
-    this.heapifyUp_();
-    return this.size;
+  swap_(i, j) {
+    const temp = this.heap[j];
+    this.heap[j] = this.heap[i];
+    this.heap[i] = temp;
   }
 }
