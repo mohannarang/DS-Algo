@@ -56,7 +56,7 @@ class PriorityQueue {
       }
       if (rChild < this.size &&
           this.comparator_(this.heap_[newPos], this.heap_[rChild]) > 0) {
-        newPos = rightChild;
+        newPos = rChild;
       }
       if (newPos == pos) {
         break;
