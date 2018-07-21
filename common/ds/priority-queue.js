@@ -1,4 +1,4 @@
- class PriorityQueue {
+class PriorityQueue {
   constructor(comparator = PriorityQueue.defaultComparator) {
     this.heap = [];
     this.comparator = comparator;
