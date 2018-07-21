@@ -1,17 +1,17 @@
-function defaultComparator(parent, child) {
-  if (parent > child) {
-    return -1;
-  }
-  if (parent < child) {
-    return 1;
-  }
-  return 0;
-}
-
-class PriorityQueue {
-  constructor(comparator = defaultComparator) {
+ class PriorityQueue {
+  constructor(comparator = PriorityQueue.defaultComparator) {
     this.heap = [];
     this.comparator = comparator;
+  }
+
+  static defaultComparator(parent, child) {
+    if (parent > child) {
+      return -1;
+    }
+    if (parent < child) {
+      return 1;
+    }
+    return 0;
   }
 
   get size() {
