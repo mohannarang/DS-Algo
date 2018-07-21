@@ -1,9 +1,9 @@
 function defaultComparator(parent, child) {
-    if (child > parent) {
-      return 1;
-    }
-    if (child < parent) {
+    if (parent > child) {
       return -1;
+    }
+    if (parent < child) {
+      return 1;
     }
     return 0;
   }
@@ -44,11 +44,12 @@ function defaultComparator(parent, child) {
           let pos = this.size - 1;
           while (pos > 0) {
               const parent = Math.floor((pos - 1) / 2);
-              if (this.comparator(this.heap[parent], this.heap[pos]) < 0) {
-                break;
+              if (this.comparator(this.heap[parent], this.heap[pos]) > 0) {
+                  this.swap_(parent, pos);
+                  pos = parent;
+              } else {
+                  break;
               }
-              this.swap_(parent, pos);
-              pos = parent;
           }
         }
   
