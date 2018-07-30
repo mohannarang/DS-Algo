@@ -40,11 +40,11 @@ function removeDups(head) {
 
   let current = head;
   while (current.next != null) {
-    if (set.has(current.next.val) {
+    if (set.has(current.next.val)) {
       current.next = current.next.next;
     } else {
       set.add(current.val);
-      prev = current;
+      current = current.next;
     }
   }
 }

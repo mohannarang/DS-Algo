@@ -81,3 +81,5 @@ class PriorityQueue {
     this.heap_[i] = temp;
   }
 }
+
+module.exports = { PriorityQueue };
