@@ -9,7 +9,6 @@ function merge(arr, l, m, r) {
     R[i] = arr[m + 1 + i];
   }
 
-  console.log(L, R);
   let i = 0;
   let j = 0;
   let k = l;
